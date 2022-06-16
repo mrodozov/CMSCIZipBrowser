@@ -5,17 +5,11 @@ import os
 import time
 import datetime
 
-def removeDirSlash(path= None):
-    if path[-1:] is '/':
-        path = path[:-1]
-    return path
-
 
 def checkForZipsInPath(full_path= None):
 
     # remove the slash if the path is given with it
-    full_path = removeDirSlash(full_path)
-    list_of_dirs = full_path.split('/')
+    list_of_dirs = full_path.rstrip('/').split('/')
     path_to_zip = ''
 
     for i in list_of_dirs:
@@ -34,7 +28,7 @@ def checkForZipsInPath(full_path= None):
 
 def browseFileInZip(zipObj=None, path_in_zip=None):
 
-    path_in_zip = removeDirSlash(path_in_zip)
+    path_in_zip = path_in_zip.rstrip('/')
     result = None
 
     if isfileinzip(zipObj, path_in_zip):
@@ -101,7 +95,7 @@ def formatResult(result = None):
 
 def isfileinzip(zipObj=None, path_in_zip=None):
 
-    path_in_zip = removeDirSlash(path_in_zip)
+    path_in_zip = path_in_zip.rstrip('/')
     list_of_items = zipObj.namelist()
     isfile = False
     #print  path_in_zip
@@ -112,7 +106,7 @@ def isfileinzip(zipObj=None, path_in_zip=None):
 
 def isdirinzip(zipObj=None, path_in_zip=None):
 
-    path_in_zip = removeDirSlash(path_in_zip)
+    path_in_zip = path_in_zip.rstrip('/')
     list_of_items = zipObj.namelist()
     isdir = False
     #print  path_in_zip
